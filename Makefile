@@ -19,6 +19,9 @@ export CXXLINKINGFLAGS   := -rdynamic -I $(PROJECTPATH)int/include/ -L $(PROJECT
 
 rebuild : clean all
 
+tests : all
+	@make -C tst/ExpressionCalculatorsTest
+
 all : int
 	@make -C src/ExpressionCalculators
 	@make -C src/Client
