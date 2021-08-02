@@ -7,6 +7,10 @@ ifeq ($(findstring tst,$(CURDIR)),tst)
   SUBPROJECTTYPE := tst
 endif
 
+ifeq ($(findstring $(SUBPROJECTNAME),$(LOGS)),$(SUBPROJECTNAME))
+  SUBPROJECTMACROS := -DEXPRESSIONCALCULATORS_LOGGING
+endif
+
 ifeq ($(SUBPROJECTKIND),lib)
   SUBPROJECTCOMPILINGFLAGS :=
   SUBPROJECTLINKINGFLAGS   := -shared
@@ -29,6 +33,6 @@ $(SUBPROJECTTARGET) : $(SUBPROJECTOBJECTS)
 
 $(SUBPROJECTOBJECTS) :
 	@mkdir -p $(dir $(SUBPROJECTOBJECTS))
-	/usr/bin/time -f '%E %MKb -- for $@' $(CXX) $(CXXSTD) $(subst obj,$(SUBPROJECTTYPE),$(subst .obj,.cpp,$@)) -o $@ $(CXXCOMPILINGFLAGS) $(SUBPROJECTCOMPILINGFLAGS) -MMD -MF $(subst .obj,.dep,$@)
+	/usr/bin/time -f '%E %MKb -- for $@' $(CXX) $(CXXSTD) $(subst obj,$(SUBPROJECTTYPE),$(subst .obj,.cpp,$@)) -o $@ $(CXXCOMPILINGFLAGS) $(SUBPROJECTCOMPILINGFLAGS) $(SUBPROJECTMACROS) -MMD -MF $(subst .obj,.dep,$@)
 
 -include $(subst .obj,.dep,$(SUBPROJECTOBJECTS))
