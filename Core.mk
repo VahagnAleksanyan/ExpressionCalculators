@@ -14,12 +14,12 @@ endif
 ifeq ($(SUBPROJECTKIND),lib)
   SUBPROJECTCOMPILINGFLAGS :=
   SUBPROJECTLINKINGFLAGS   := -shared
-  SUBPROJECTTARGET         := ../../lib/lib$(PROJECTNAME)$(SUBPROJECTNAME).so
+  SUBPROJECTTARGET         := $(PROJECTPATH)/lib/lib$(PROJECTNAME)$(SUBPROJECTNAME).so
 endif
 ifeq ($(SUBPROJECTKIND),bin)
   SUBPROJECTCOMPILINGFLAGS :=
   SUBPROJECTLINKINGFLAGS   :=
-  SUBPROJECTTARGET         := ../../bin/$(PROJECTNAME)$(SUBPROJECTNAME)
+  SUBPROJECTTARGET         := $(PROJECTPATH)/bin/$(PROJECTNAME)$(SUBPROJECTNAME)
 endif
 
 SUBPROJECTSOURCES := $(addprefix $(CURDIR),$(notdir $(shell find  -name '*.cpp')))
@@ -36,3 +36,4 @@ $(SUBPROJECTOBJECTS) :
 	/usr/bin/time -f '%E %MKb -- for $@' $(CXX) $(CXXSTD) $(subst obj,$(SUBPROJECTTYPE),$(subst .obj,.cpp,$@)) -o $@ $(CXXCOMPILINGFLAGS) $(SUBPROJECTCOMPILINGFLAGS) $(SUBPROJECTMACROS) -MMD -MF $(subst .obj,.dep,$@)
 
 -include $(subst .obj,.dep,$(SUBPROJECTOBJECTS))
+
