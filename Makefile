@@ -12,21 +12,13 @@ else
   export LOGS := $(logs)
 endif
 
-rebuild : clean all
 
-tests : all
-	@make -C tst/ExpressionCalculatorsTest
+# Dependencies
+tests                          : int src.Core tst.ExpressionCalculatorsTest
+all                            : int src.Core src.Client
+deps.ExpressionCalculatorsTest : int src.Core
+deps.Client                    : int src.Core
+deps.Core                      : int
 
-all : int
-	@make -C src/Core
-	@make -C src/Client
-
-int :
-	@mkdir -p int
-	@mkdir -p int/include
-	@ln -sf $(PROJECTPATH)/src int/include/ExpressionCalculators
-	@ln -sf $(PROJECTPATH)/lib int/lib
-
-clean :
-	rm -rf obj lib int ext bin
+include Common.mk
 
