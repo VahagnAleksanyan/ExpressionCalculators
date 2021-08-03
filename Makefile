@@ -14,11 +14,11 @@ endif
 
 
 # Dependencies
-tests                          : int src.Core tst.ExpressionCalculatorsTest
-all                            : int src.Core src.Client
-deps.ExpressionCalculatorsTest : int src.Core
-deps.Client                    : int src.Core
-deps.Core                      : int
+tests         : int src.Core tst.TestCore
+all           : int src.Core src.Client
+deps.TestCore : int src.Core
+deps.Client   : int src.Core
+deps.Core     : int
 
 include Common.mk
 
