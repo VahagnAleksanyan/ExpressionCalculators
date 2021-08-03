@@ -1,0 +1,6 @@
+SUBPROJECTNAME := Core
+SUBPROJECTKIND := lib
+SUBPROJECTLIBS :=
+
+include ../../Core.mk
+
