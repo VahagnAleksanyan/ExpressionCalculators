@@ -6,10 +6,11 @@ tst.% : deps.%
 
 .PHONY: int
 int :
-	@mkdir -p int
-	@mkdir -p int/include
-	@ln -sf $(PROJECTPATH)/src int/include/ExpressionCalculators
-	@ln -sf $(PROJECTPATH)/lib int/lib
+	@mkdir -p $(PROJECTPATH)/int
+	@mkdir -p $(PROJECTPATH)/int/include
+	@ln -sfn $(PROJECTPATH)/src $(PROJECTPATH)/int/include/ExpressionCalculators
+	@ln -sfn $(PROJECTPATH)/lib $(PROJECTPATH)/int/lib
+	@echo ====== Internal dependency ======
 
 .PHONY: clean
 clean :
