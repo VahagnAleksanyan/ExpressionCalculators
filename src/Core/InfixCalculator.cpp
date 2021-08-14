@@ -18,11 +18,10 @@ ValueType InfixCalculator::calculate(std::string const& expression) const
   auto [numbers, signs] = split(expression);
   LOG("Expression is splitted!");
   LOG("Numbers are: ", numbers, ", signs are: ", signs);
-  // VA::TODO::Really?!
-  if (numbers.size() != signs.size()+1) { LOG("Throwing exception, expression contains adjacent signs!"); throw std::invalid_argument("Expression contains adjacent signs!"); }
+  assert(numbers.size() == signs.size()+1);
 
   LOG("Calculating...");
-  while (!signs.empty())
+  while(!signs.empty())
   {
     auto ii = firstOperationIndex(signs);
     LOG("First operation index: ", ii, ", operation: ", signs[ii]);
